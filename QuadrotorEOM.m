@@ -1,0 +1,44 @@
+% Contributors: Emma Haas
+% Course number: ASEN 3801
+% File name: var_dot.m
+% Created: 3/3/26
+%
+% Objective: Create a simuulation of a quadrotor using ode45 to simulate
+% the full nonlinear equations of motion. 
+%
+% Inputs: t - time, var - 12 x 1 aircraft state vector, g - accel due to
+% gravity, m - mass, I - inertia matrix, d, km, nu, mu are remaining
+% quadrotor parameters, motor_forces = [f1; f2; f3; f4] 4 x 1 vector of
+% motor forces
+%
+% Outputs: var_dot - 12 x 1 derivative of the state vector
+
+
+function var_dot = QuadrotorEOM(t, var, g, m, I, d, km, nu, mu, motor_forces)
+
+    % Extract state variables
+    pos = var(1:3);        % Position (x, y, z)
+    vel = var(4:6);        % Velocity (vx, vy, vz)
+    euler = var(7:9);      % Euler angles (phi, theta, psi)
+    omega = var(10:12);    % Angular velocity (p, q, r)
+
+    % Compute forces and moments
+    thrust = sum(motor_forces);  % Total thrust
+    F = [0; 0; thrust - m*g];     % Force vector in body frame
+
+    % Compute rotational dynamics
+    R = eul2rotm(euler);          % Rotation matrix from Euler angles
+    torque = computeTorque(motor_forces, d, km); % Compute control moments
+
+    % Derivatives
+    pos_dot = vel;                % Position derivative
+    vel_dot = (1/m) * (R * F);   % Velocity derivative
+    euler_dot = omega;            % Euler angle derivative
+    omega_dot = I \ (torque - cross(omega, I * omega)); % Angular velocity derivative
+
+    % Compute the thrust vector in the body frame
+    thrust_vector = R * [0; 0; thrust];  % DCM to inertial frame
+
+    % Update the state derivatives with thrust vector
+    var_dot = [pos_dot; vel_dot; euler_dot; omega_dot; thrust_vector];
+end
