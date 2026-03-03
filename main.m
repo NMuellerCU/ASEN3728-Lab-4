@@ -11,7 +11,7 @@ km = 0.0024; % Control moment coefficient [N*m/(N)]
 Ix = 5.8E-5; % Body x-axis Moment of Inertia [kg*m^2]
 Iy =7.2E-5; % Body y-axis Moment of Inertia [kg*m^2]
 Iz = 1.0E-4; % Body z-axis Moment of Inertia [kg*m^2]
-v =1E-3; % Aerodynamic force coefficient [N/(m/s)^2]
+nu =1E-3; % Aerodynamic force coefficient [N/(m/s)^2]
 mu = 2E-6; % Aerodynamic moment coefficient [N*m/(rad/s)^2]
 g = 9.81; % [m/s^2]
 
@@ -35,6 +35,7 @@ I_mat = [Ix 0 0;
 
 data_flightpath = load("RSdata_nocontrol.mat");
 
-t = 0:0.1:10; % s
+t_span = 0:0.1:10; % s
 eom_0 = data_flightpath.rt_estim.signals.values(1, :);
-vardot = quadrotorEOM(t, eom_0, g, m, I, d, km, nu, mu);
+motor_forces_0 = data_flightpath.rt_motor.signals.values(1,:);
+[t, x] = ode45(@(t, x) QuadrotorEOM(t, x, g, m, I_mat, d, km, nu, mu,motor_forces_0), t_span, eom_0);
