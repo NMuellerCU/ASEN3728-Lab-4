@@ -1,0 +1,17 @@
+clear; clc; close all;
+
+
+m = 0.068; % Quadrotor mass [kg]
+d = 0.060; %Radial distance from CG to propellor [m]
+Control moment coefficient, 𝑘𝑘𝑚:
+km = 0.0024; % Control moment coefficient [N*m/(N)]
+, 𝐼𝐼𝑥𝑥:
+5.8E-5 % Body x-axis Moment of Inertia [kg*m^2]
+Body y-axis Moment of Inertia, 𝐼𝐼𝑦𝑦:
+7.2E-5 kg*m^2
+Body z-axis Moment of Inertia, 𝐼𝐼𝑧𝑧:
+1.0E-4 kg*m^2
+Aerodynamic force coefficient 𝑣𝑣:
+1E-3 N/(m/s)^2
+Aerodynamic moment coefficient 𝜇𝜇:
+2E-6 N*m/(rad/s)^2
