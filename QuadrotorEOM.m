@@ -18,8 +18,8 @@ function var_dot = QuadrotorEOM(t, var, g, m, I, d, km, nu, mu, motor_forces)
 
     % Extract state variables
     pos = var(1:3);        % Position (x, y, z)
-    vel = var(4:6);        % Velocity (vx, vy, vz)
-    euler = var(7:9);      % Euler angles (phi, theta, psi)
+    euler = var(4:6);        % Velocity (vx, vy, vz)
+    vel = var(7:9);      % Euler angles (phi, theta, psi)
     omega = var(10:12);    % Angular velocity (p, q, r)
 
     % Compute forces and moments

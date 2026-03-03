@@ -1,3 +1,7 @@
+% Contributors: Nate Mueller
+% Course Number: ASEN 3801
+% File Name: main.m
+% Created On: 3/3/2026
 clear; clc; close all;
 
 
@@ -9,3 +13,28 @@ Iy =7.2E-5; % Body y-axis Moment of Inertia [kg*m^2]
 Iz = 1.0E-4; % Body z-axis Moment of Inertia [kg*m^2]
 v =1E-3; % Aerodynamic force coefficient [N/(m/s)^2]
 mu = 2E-6; % Aerodynamic moment coefficient [N*m/(rad/s)^2]
+g = 9.81; % [m/s^2]
+
+
+
+
+% Inputs: t - time, var - 12 x 1 aircraft state vector, g - accel due to
+% gravity, m - mass, I - inertia matrix, d, km, nu, mu are remaining
+% quadrotor parameters, motor_forces = [f1; f2; f3; f4] 4 x 1 vector of
+% motor forces
+%
+% Outputs: var_dot - 12 x 1 derivative of the state vector
+
+
+% function var_dot = QuadrotorEOM(t, var, g, m, I, d, km, nu, mu, motor_forces)
+
+I_mat = [Ix 0 0;
+         0 Iy 0;
+         0 0 Iz]; %matrix Principal MOI [kg*m^2]
+
+
+data_flightpath = load("RSdata_nocontrol.mat");
+
+t = 0:0.1:10; % s
+eom_0 = data_flightpath.rt_estim.signals.values(1, :);
+vardot = quadrotorEOM(t, eom_0, g, m, I, d, km, nu, mu);
