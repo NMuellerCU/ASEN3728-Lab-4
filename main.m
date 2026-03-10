@@ -40,6 +40,9 @@ state_data = data_flightpath.rt_estim.signals.values; %extract state data (Nx12)
 motor_data = data_flightpath.rt_motor.signals.values; %extract motor data (Nx4)
 
 t_span = [0 10]; % time pspan for ode45 test [s]
-eom_0 = state_data(1, :); % initial conditions for 1x12 eom variables;
-motor_forces_0 = motor_data(1,:);
-[t, x] = ode45(@(t, x) QuadrotorEOM(t, x, g, m, I_mat, d, km, nu, mu,motor_forces_0), t_span, eom_0);
+eom_0 = state_data(1, :)'; % initial conditions for 12x1 eom variables;
+trim_state = zeros(12,1);
+f_trim = m*g/4;
+trim_forces = f_trim*ones(4,1);
+motor_forces_0 = motor_data(1,:).';
+[t, x] = ode45(@(t, x)  QuadrotorEOM(t, x, g, m, I_mat, d, km, nu, mu,trim_forces), t_span, trim_state);

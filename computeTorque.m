@@ -5,5 +5,5 @@ quadrotor_mat = [-1 -1 -1 -1;
           -d_q, -d_q, d_q, d_q;
           d_q, -d_q, -d_q, d_q;
           km, -km, km, -km];
-torque = quadrotor_mat*motor_forces;
+torque = quadrotor_mat*motor_forces';
 end
