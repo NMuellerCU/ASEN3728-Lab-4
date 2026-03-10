@@ -22,22 +22,30 @@ function var_dot = QuadrotorEOM(t, var, g, m, I, d, km, nu, mu, motor_forces)
     vel = var(7:9);      % Euler angles (phi, theta, psi)
     omega = var(10:12);    % Angular velocity (p, q, r)
 
+    phi = euler(1);
+    theta = euler(2);
+    psi = euler(3);
+    T_euler = [1, sin(phi)*tan(theta), cos(phi)*tan(theta);
+               0, cos(phi), -sin(phi);
+               0, sin(phi)*sec(theta), cos(phi)*sec(theta)];
+
+
     % Compute forces and moments
     thrust = sum(motor_forces);  % Total thrust
     F = [0; 0; thrust - m*g];     % Force vector in body frame
 
     % Compute rotational dynamics
-    R = eul2rotm(euler);          % Rotation matrix from Euler angles
-    torque = computeTorque(motor_forces, d, km); % Compute control moments
-
+    R = eul2rotm([psi theta phi], 'ZYX');          % Rotation matrix from Euler angles
+    torque_with_z = computeTorque(motor_forces', d, km); % Compute control moments
+    torque = torque_with_z(2:4);
     % Derivatives
     pos_dot = vel;                % Position derivative
     vel_dot = (1/m) * (R * F);   % Velocity derivative
-    euler_dot = omega;            % Euler angle derivative
+    euler_dot = T_euler*omega;            % Euler angle derivative
     omega_dot = I \ (torque - cross(omega, I * omega)); % Angular velocity derivative
     % Compute the thrust vector in the body frame
     % thrust_vector = R * [0; 0; thrust];  % DCM to inertial frame
 
     % Update the state derivatives with thrust vector
-    var_dot = [pos_dot; vel_dot; euler_dot; omega_dot];
+    var_dot = [pos_dot; euler_dot; vel_dot; omega_dot];
 end
