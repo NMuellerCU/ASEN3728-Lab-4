@@ -25,17 +25,17 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     % Plot inertial position
     figure(fig(1));
     subplot(311);
-    plot(time, aircraft_state_array(1,:), col); hold on;
+    plot(time, aircraft_state_array(:,1), col); hold on;
     ylabel('Inertial Position (X)');
     grid on;
 
     subplot(312);
-    plot(time, aircraft_state_array(2,:), col); hold on;
+    plot(time, aircraft_state_array(:,2), col); hold on;
     ylabel('Inertial Position (Y)');
     grid on;
 
     subplot(313);
-    plot(time, aircraft_state_array(3,:), col); hold on;
+    plot(time, aircraft_state_array(:,3), col); hold on;
     ylabel('Inertial Position (Z)');
     xlabel('Time (s)');
     grid on;
@@ -43,17 +43,17 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     % Plot Euler angles
     figure(fig(2));
     subplot(311);
-    plot(time, aircraft_state_array(4,:), col); hold on;
+    plot(time, aircraft_state_array(:,4), col); hold on;
     ylabel('Roll (phi)');
     grid on;
 
     subplot(312);
-    plot(time, aircraft_state_array(5,:), col); hold on;
+    plot(time, aircraft_state_array(:,5), col); hold on;
     ylabel('Pitch (theta)');
     grid on;
 
     subplot(313);
-    plot(time, aircraft_state_array(6,:), col); hold on;
+    plot(time, aircraft_state_array(:,6), col); hold on;
     ylabel('Yaw (psi)');
     xlabel('Time (s)');
     grid on;
@@ -61,17 +61,17 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     % Plot inertial velocity in body frame
     figure(fig(3));
     subplot(311);
-    plot(time, aircraft_state_array(7,:), col); hold on;
+    plot(time, aircraft_state_array(:,7), col); hold on;
     ylabel('Velocity (U)');
     grid on;
 
     subplot(312);
-    plot(time, aircraft_state_array(8,:), col); hold on;
+    plot(time, aircraft_state_array(:,8), col); hold on;
     ylabel('Velocity (V)');
     grid on;
 
     subplot(313);
-    plot(time, aircraft_state_array(9,:), col); hold on;
+    plot(time, aircraft_state_array(:,9), col); hold on;
     ylabel('Velocity (W)');
     xlabel('Time (s)');
     grid on;
@@ -79,17 +79,17 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     % Plot angular velocity
     figure(fig(4));
     subplot(311);
-    plot(time, aircraft_state_array(10,:), col); hold on;
+    plot(time, aircraft_state_array(:,10), col); hold on;
     ylabel('P (Roll Rate)');
     grid on;
 
     subplot(312);
-    plot(time, aircraft_state_array(11,:), col); hold on;
+    plot(time, aircraft_state_array(:,11), col); hold on;
     ylabel('Q (Pitch Rate)');
     grid on;
 
     subplot(313);
-    plot(time, aircraft_state_array(12,:), col); hold on;
+    plot(time, aircraft_state_array(:,12), col); hold on;
     ylabel('R (Yaw Rate)');
     xlabel('Time (s)');
     grid on;
@@ -99,22 +99,22 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     % Plot control inputs
     figure(fig(5));
     subplot(411);
-    plot(time, control_input_array(1,:), col); hold on;
+    plot(time, control_input_array(:,1), col); hold on;
     ylabel('Control Input 1');
     grid on;
 
     subplot(412);
-    plot(time, control_input_array(2,:), col); hold on;
+    plot(time, control_input_array(:,2), col); hold on;
     ylabel('Control Input 2');
     grid on;
 
     subplot(413);
-    plot(time, control_input_array(3,:), col); hold on;
+    plot(time, control_input_array(:,3), col); hold on;
     ylabel('Control Input 3');
     grid on;
 
     subplot(414);
-    plot(time, control_input_array(4,:), col); hold on;
+    plot(time, control_input_array(:,4), col); hold on;
     ylabel('Control Input 4');
     xlabel('Time (s)');
     grid on;
