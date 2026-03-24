@@ -75,7 +75,7 @@ title("Angular Rate of Quadrotor in Trim State with Aerodynamic Forces and Momen
 % eom_0 = state_data(1, :)'; % initial conditions for 12x1 eom variables;
 % trim_state = zeros(12,1);
 % f_trim = m*g/4;
-% trim_forces = f_trim*ones(4,1);
+% trim_forces = f_trim*on   es(4,1);
 % motor_forces_0 = motor_data(1,:).';
 % [t, x] = ode45(@(t, x)  QuadrotorEOM(t, x, g, m, I_mat, d, km, nu, mu,trim_forces), t_span, trim_state);
 
