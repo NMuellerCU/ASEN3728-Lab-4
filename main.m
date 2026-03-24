@@ -39,7 +39,7 @@ time_data = data_flightpath.rt_estim.time; %extract time data (Nx1)
 state_data = data_flightpath.rt_estim.signals.values; %extract state data (Nx12)
 motor_data = data_flightpath.rt_motor.signals.values; %extract motor data (Nx4)
 
-<<<<<<< HEAD
+
 t_span = [0 10]; % time pspan for ode45 test [s]
 eom_0 = state_data(1, :)'; 
 eom_hover = zeros(12,1);% initial conditions for 12x1 eom variables;
@@ -69,7 +69,7 @@ figure(3);
 plot3(ang_rate_p, ang_rate_q, ang_rate_r);
 xlabel("p (rad/s)"); ylabel("q (rad/s)"); zlabel("r (rad/s)");
 title("Angular Rate of Quadrotor in Trim State with Aerodynamic Forces and Moments")
-=======
+
 t_span = linspace(0, 10, length(time_data)); % time pspan for ode45 test [s]
 eom_0 = state_data(1, :)'; % initial conditions for 12x1 eom variables;
 trim_state = zeros(12,1);
@@ -82,4 +82,3 @@ motor_forces_0 = motor_data(1,:).';
 fig = [1 2 3 4 5 6];
 PlotAircraftSim(t, x, motor_data, fig, 'b');
 
->>>>>>> 216dd6c33bc0185ec17f175a676d10dd7ab2c527
