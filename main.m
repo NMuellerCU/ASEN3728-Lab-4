@@ -40,9 +40,31 @@ state_data = data_flightpath.rt_estim.signals.values; %extract state data (Nx12)
 motor_data = data_flightpath.rt_motor.signals.values; %extract motor data (Nx4)
 
 t_span = [0 10]; % time pspan for ode45 test [s]
-eom_0 = state_data(1, :)'; % initial conditions for 12x1 eom variables;
-trim_state = zeros(12,1);
-f_trim = m*g/4;
-trim_forces = f_trim*ones(4,1);
-motor_forces_0 = motor_data(1,:).';
-[t, x] = ode45(@(t, x)  QuadrotorEOM(t, x, g, m, I_mat, d, km, nu, mu,trim_forces), t_span, trim_state);
+eom_0 = state_data(1, :)'; 
+eom_hover = zeros(12,1);% initial conditions for 12x1 eom variables;
+motor_forces_hover = m*g/4*ones(4,1);
+% trim_forces = f_trim*ones(4,1);
+% motor_forces_0 = motor_data(1,:).';
+[t, x] = ode45(@(t, x)  QuadrotorEOM(t, x, g, m, I_mat, d, km, nu, mu,motor_forces_hover), t_span, eom_hover);
+
+
+%% plots
+
+
+
+vel_x = x(:,7);
+vel_y = x(:,8);
+vel_z = x(:,9);
+ang_rate_p = x(:,10);
+ang_rate_q = x(:,11);
+ang_rate_r = x(:,12);
+
+figure(2);
+plot3(vel_x, vel_y, vel_z);
+xlabel("v_x (m/s)"); ylabel("v_y (m/s)"); zlabel("v_z (m/s)");
+title("Velocity of Quadrotor in Trim State with Aerodynamic Forces and Moments")
+
+figure(3);
+plot3(ang_rate_p, ang_rate_q, ang_rate_r);
+xlabel("p (rad/s)"); ylabel("q (rad/s)"); zlabel("r (rad/s)");
+title("Angular Rate of Quadrotor in Trim State with Aerodynamic Forces and Moments")
