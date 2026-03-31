@@ -61,15 +61,15 @@ ang_rate_p = x(:,10);
 ang_rate_q = x(:,11);
 ang_rate_r = x(:,12);
 
-figure(2);
-plot3(vel_x, vel_y, vel_z);
-xlabel("v_x (m/s)"); ylabel("v_y (m/s)"); zlabel("v_z (m/s)");
-title("Velocity of Quadrotor in Trim State with Aerodynamic Forces and Moments")
-
-figure(3);
-plot3(ang_rate_p, ang_rate_q, ang_rate_r);
-xlabel("p (rad/s)"); ylabel("q (rad/s)"); zlabel("r (rad/s)");
-title("Angular Rate of Quadrotor in Trim State with Aerodynamic Forces and Moments")
+% figure(2);
+% plot3(vel_x, vel_y, vel_z);
+% xlabel("v_x (m/s)"); ylabel("v_y (m/s)"); zlabel("v_z (m/s)");
+% title("Velocity of Quadrotor in Trim State with Aerodynamic Forces and Moments")
+% 
+% figure(3);
+% plot3(ang_rate_p, ang_rate_q, ang_rate_r);
+% xlabel("p (rad/s)"); ylabel("q (rad/s)"); zlabel("r (rad/s)");
+% title("Angular Rate of Quadrotor in Trim State with Aerodynamic Forces and Moments")
 
 % t_span = linspace(0, 10, length(time_data)); % time pspan for ode45 test [s]
 % eom_0 = state_data(1, :)'; % initial conditions for 12x1 eom variables;
@@ -81,5 +81,6 @@ title("Angular Rate of Quadrotor in Trim State with Aerodynamic Forces and Momen
 
 % Extract the final state and plot the results using PlotAircraftSim.m
 fig = [1 2 3 4 5 6];
-PlotAircraftSim(t, x, motor_data, fig, 'b');
+motor_forces_hover_length = m*g/4*ones(69,4);
+PlotAircraftSim(t, x, motor_forces_hover_length, fig, 'b');
 
