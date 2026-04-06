@@ -100,22 +100,22 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     figure(fig(5));
     subplot(411);
     plot(time, control_input_array(:,1), col); hold on;
-    ylabel('Control Input 1');
+    ylabel('Zc (Thrust)');
     grid on;
 
     subplot(412);
     plot(time, control_input_array(:,2), col); hold on;
-    ylabel('Control Input 2');
+    ylabel('Lc (Roll Moment)');
     grid on;
 
     subplot(413);
     plot(time, control_input_array(:,3), col); hold on;
-    ylabel('Control Input 3');
+    ylabel('Mc (Pitch Moment)');
     grid on;
 
     subplot(414);
     plot(time, control_input_array(:,4), col); hold on;
-    ylabel('Control Input 4');
+    ylabel('Nc (Yaw Moment)');
     xlabel('Time (s)');
     grid on;
 
