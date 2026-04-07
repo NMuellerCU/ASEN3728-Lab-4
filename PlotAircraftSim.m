@@ -26,114 +26,110 @@ function PlotAircraftSim(time, aircraft_state_array, control_input_array, fig, c
     figure(fig(1));
     subplot(311);
     plot(time, aircraft_state_array(:,1), col); hold on;
-    ylabel('Inertial Position (X)');
+    ylabel('Inertial Position X [m]');
     grid on;
 
     subplot(312);
     plot(time, aircraft_state_array(:,2), col); hold on;
-    ylabel('Inertial Position (Y)');
+    ylabel('Inertial Position Y [m]');
     grid on;
 
     subplot(313);
     plot(time, aircraft_state_array(:,3), col); hold on;
-    ylabel('Inertial Position (Z)');
-    xlabel('Time (s)');
+    ylabel('Inertial Position Z [m]');
+    xlabel('Time [s]');
     grid on;
 
     % Plot Euler angles
     figure(fig(2));
     subplot(311);
     plot(time, aircraft_state_array(:,4), col); hold on;
-    ylabel('Roll (phi)');
+    ylabel('\phi [rad]');
     grid on;
 
     subplot(312);
     plot(time, aircraft_state_array(:,5), col); hold on;
-    ylabel('Pitch (theta)');
+    ylabel('\theta [rad]');
     grid on;
 
     subplot(313);
     plot(time, aircraft_state_array(:,6), col); hold on;
-    ylabel('Yaw (psi)');
-    xlabel('Time (s)');
+    ylabel('\psi [rad]');
+    xlabel('Time [s]');
     grid on;
 
-    % Plot inertial velocity in body frame
+    % Plot body-frame velocities
     figure(fig(3));
     subplot(311);
     plot(time, aircraft_state_array(:,7), col); hold on;
-    ylabel('Velocity (U)');
+    ylabel('u [m/s]');
     grid on;
 
     subplot(312);
     plot(time, aircraft_state_array(:,8), col); hold on;
-    ylabel('Velocity (V)');
+    ylabel('v [m/s]');
     grid on;
 
     subplot(313);
     plot(time, aircraft_state_array(:,9), col); hold on;
-    ylabel('Velocity (W)');
-    xlabel('Time (s)');
+    ylabel('w [m/s]');
+    xlabel('Time [s]');
     grid on;
 
-    % Plot angular velocity
+    % Plot angular velocities
     figure(fig(4));
     subplot(311);
     plot(time, aircraft_state_array(:,10), col); hold on;
-    ylabel('P (Roll Rate)');
+    ylabel('p [rad/s]');
     grid on;
 
     subplot(312);
     plot(time, aircraft_state_array(:,11), col); hold on;
-    ylabel('Q (Pitch Rate)');
+    ylabel('q [rad/s]');
     grid on;
 
     subplot(313);
     plot(time, aircraft_state_array(:,12), col); hold on;
-    ylabel('R (Yaw Rate)');
-    xlabel('Time (s)');
+    ylabel('r [rad/s]');
+    xlabel('Time [s]');
     grid on;
 
-    %% Figure 5: control inputs - w/ 4 subplots 
+    %% Figure 5: control inputs
 
-    % Plot control inputs
     figure(fig(5));
     subplot(411);
     plot(time, control_input_array(:,1), col); hold on;
-    ylabel('Zc (Thrust)');
+    ylabel('F_{c,z} [N]');
     grid on;
 
     subplot(412);
     plot(time, control_input_array(:,2), col); hold on;
-    ylabel('Lc (Roll Moment)');
+    ylabel('L_c [N m]');
     grid on;
 
     subplot(413);
     plot(time, control_input_array(:,3), col); hold on;
-    ylabel('Mc (Pitch Moment)');
+    ylabel('M_c [N m]');
     grid on;
 
     subplot(414);
     plot(time, control_input_array(:,4), col); hold on;
-    ylabel('Nc (Yaw Moment)');
-    xlabel('Time (s)');
+    ylabel('N_c [N m]');
+    xlabel('Time [s]');
     grid on;
 
-    %% Figure 6: 3D path of aircraft  
+    %% Figure 6: 3D path
 
-    % Plot 3D path of the aircraft
     figure(fig(6));
-    plot3(aircraft_state_array(1,:), aircraft_state_array(2,:), aircraft_state_array(3,:), col);
+    plot3(aircraft_state_array(:,1), aircraft_state_array(:,2), aircraft_state_array(:,3), col);
     hold on;
-    scatter3(aircraft_state_array(1,1), aircraft_state_array(2,1), aircraft_state_array(3,1), 'g', 'filled'); % Start point
-    scatter3(aircraft_state_array(1,end), aircraft_state_array(2,end), aircraft_state_array(3,end), 'r', 'filled'); % End point
-    xlabel('X Position');
-    ylabel('Y Position');
-    zlabel('Z Position');
+    scatter3(aircraft_state_array(1,1), aircraft_state_array(1,2), aircraft_state_array(1,3), 40, 'g', 'filled');
+    scatter3(aircraft_state_array(end,1), aircraft_state_array(end,2), aircraft_state_array(end,3), 40, 'r', 'filled');
+    xlabel('X Position [m]');
+    ylabel('Y Position [m]');
+    zlabel('Z Position [m]');
     title('3D Path of the Aircraft');
     grid on;
     view(3);
 
 end
-
-    
